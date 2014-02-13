@@ -66,8 +66,15 @@ describe "Sites" do
 	end
 
 	describe "GET /sites/new" do
-		it 'is successful with HTML'
-		it 'is a 404 with JSON'
+		it 'is successful with HTML' do
+			get '/sites/new'
+			response.status.should == 200
+		end
+
+		it 'is a 404 with JSON' do
+			get "/sites/new.json"
+			response.status.should == 404
+		end
 	end
 
 	describe "GET /linkfarm/" do
