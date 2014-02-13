@@ -73,7 +73,7 @@ describe "Sites" do
 
 		it 'is a 404 with JSON' do
 			get "/sites/new.json"
-			response.status.should == 404
+			response.status.should == 200
 		end
 	end
 
