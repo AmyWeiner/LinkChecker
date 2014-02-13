@@ -49,6 +49,7 @@ end
 group :development, :test do
 	gem 'pry'
 	gem 'rspec-rails'
+  gem 'figaro'
 end
 
 # Use ActiveModel has_secure_password
