@@ -27,6 +27,15 @@ class SitesController < ApplicationController
     end
   end
 
+  def destroy
+    @site = Site.find(params[:id])
+    @site.destroy
+    respond_to do |f|
+      f.html { redirect_to site_path(@site) }
+      f.json { render :json => {:error => "Site deleted form the databse"}, :status => 204 }
+    end
+  end
+
   def linkfarm
   end
 
@@ -48,16 +57,5 @@ class SitesController < ApplicationController
     end
     true  # so we can do "render_404 and return"
   end
-
 end
 
-  # rescue_from ActionController::ParameterMissing, :handle_create_param_missing :only => :create
-  #
-  # def handle_create_param_missing
-  #    respond_to do |f|
-  #     f.html do 
-  #       redirect_to new_site_path
-  #     end
-  #     f.json {render :json  => {:error => err.message}, :status => 422}
-  #   end
-  # #
