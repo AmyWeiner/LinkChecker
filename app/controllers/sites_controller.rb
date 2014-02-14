@@ -11,7 +11,10 @@ class SitesController < ApplicationController
       f.html { redirect_to site_path(@site) }
       f.json { render :json => @site }
     end
+  end
 
+  def edit
+    @site = Site.find(params[:id])
   end
 
   def show
@@ -36,31 +39,18 @@ class SitesController < ApplicationController
     end
   end
 
-
   rescue_from ActionView::MissingTemplate do |exception|
     # use exception.path to extract the path information
     # This does not work for partials
-    render_optional_error_file(404)
-  end
-
-  def render_404
     respond_to do |type|
       type.html { render :template => "errors/error_404", :layout => 'application', :status => 404 }
-      type.json  { render :json  => {:error => err.message}, :status => 202 }
+      type.json  { render :json  => {:error => "404, not found"}, :status => 404 }
     end
     true  # so we can do "render_404 and return"
   end
 
-  def render_optional_error_file(status_code)
-    if status_code == :not_found
-      render_404
-    end
-  end
-
 end
 
-
-  
   # rescue_from ActionController::ParameterMissing, :handle_create_param_missing :only => :create
   #
   # def handle_create_param_missing
