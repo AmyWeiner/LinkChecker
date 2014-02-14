@@ -39,7 +39,7 @@ class SitesController < ApplicationController
     end
   end
 
-  rescue_from ActionView::MissingTemplate do |exception|
+  rescue_from ActionView::MissingTemplate, :only => [:new, :edit] do |exception|
     # use exception.path to extract the path information
     # This does not work for partials
     respond_to do |type|
